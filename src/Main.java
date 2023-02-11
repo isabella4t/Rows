@@ -42,7 +42,7 @@ public class Main {
         }
 
         if(equations[1][1]!=0) {
-            //x is filled
+            // answer to first equation is sol 1 / coeff
             ret[1] = solutions[1] / equations[1][1];
             ret[0] = (solutions[0]-(equations[0][1]*ret[1]))/equations[0][0];
 
