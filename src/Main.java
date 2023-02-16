@@ -105,19 +105,21 @@ public class Main {
         0 + 2/3 y = 5/3
 
          */
+        int toprow = botRow-1;
+        if(toprow<0) return;
 
         //first multiply top row by bottomleft/topleft
-        double topmultiply = equations[botRow][botRow-1]/equations[botRow-1][botRow-1];
-        for(int i = 0; i< equations[botRow-1].length;i++){
-            equations[botRow-1][i] = equations[botRow-1][i]*topmultiply;
-            solutions[botRow-1] *= topmultiply;
+        double topmultiply = equations[botRow][toprow]/equations[toprow][toprow];
+        for(int i = 0; i< equations[toprow].length;i++){
+            equations[toprow][i] = equations[toprow][i]*topmultiply;
         }
+        solutions[toprow] *= topmultiply;
         //now minus the bottom by top which should get rid of x
 
         for(int i = 0; i<equations[1].length;i++){
             equations[botRow][i] = equations[botRow][i]-equations[botRow-1][i];
-            solutions[botRow] = solutions[botRow]- solutions[botRow-1];
         }
+        solutions[botRow] = solutions[botRow]- solutions[botRow-1];
         //now x should be 0
 
     }
