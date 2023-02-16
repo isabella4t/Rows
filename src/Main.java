@@ -9,10 +9,14 @@ public class Main {
         double[][] coeffs = {{3,1},{0,2}};
         double[] answers = {10,2};
 
-        backsub(coeffs,answers);
+        double[] nee = backsub(coeffs,answers);
+        for(int i =0;i<nee.length;i++){
+           System.out.println(" " + nee[i]);
+        }
     }
-
-//backsub takes a set of coeffs from an equation and the solution to the equation and should return the solutions 'x' and 'y'
+//AHHH this code only takes 2x2 matrices
+//backsub takes a set of coeffs from an equation and the solution
+// to the equation and should return the solutions 'x' and 'y'
     public static double[] backsub(double[][] equations, double solutions[]){
         double[] ret = new double[equations[0].length];
 
@@ -28,12 +32,13 @@ public class Main {
 
         solutions[0] /= equations[0][0];
         //now ret should be okay
-       // return ret;
+        return ret;
 
+        /*
         for(int b = equations.length-1; b>=0;b--){
 
         }
-        /*
+
         This code was my attempt at abstracting it
         for(int k = solutions.length-1;k>=0;k--){
             for(int i = solutions.length-k;i>0;i--){
@@ -73,4 +78,68 @@ public class Main {
         //now x should be 0
 
     }
+
+    /*
+    [1 1] [1 0] =  [1 1]
+    [1 2] [0 1] =  [1 2]
+
+    What is association
+    Sorriful stewie
+
+    omg you can multiply the matrices that you're gonna multiply in anyways together then multiply
+
+    7(8 * 9) or (7*8)9
+
+
+    OK here is the equation stuff
+
+    LU = A
+    L is lower triangle and U is upper triangle
+
+    Ax = b
+    LUx = b
+    Ux = L^-1 b
+    x = A^-1 b
+
+     */
+
+    public static int[][] Matrixmultiply(int[][] fir, int[][] sec){
+        //new array is row length in first by column length in second
+        int[][] newarr = new int[fir.length][sec[0].length];
+        int acc = 0;
+
+        for(int i = 0; i< fir.length;i++){
+            for(int j = 0; j<sec[0].length; j++){
+                for(int l = 0; l<fir[0].length; l++){
+                    newarr[i][j] += fir[i][l]*sec[l][j];
+                }
+            }
+        }
+        return newarr;
+    }
+
+
+    //return retcal so setval.A = scale row
+
+    //return a an array that when multiplied by AR would make AR[row][i] * scale factor
+    //retval should be diagonal
+    public static double[][] scaleRow(double[][] AR, double S, int row){
+        double[][] retval = new double[AR.length][AR[0].length];
+
+        for(int i = 0; i<AR.length;i++){
+            for(int j =0; j<AR[0].length;j++){
+                if(j==i){
+                    if(i==row){
+                        retval[i][j] = S;
+                    }
+                    else retval[i][j] = 1;
+                }
+                else retval[i][j] = 0;
+            }
+        }
+        return retval;
+    }
+
+    //TODO: Make a method that addROWs
+
 }
