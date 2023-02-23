@@ -3,6 +3,8 @@ public class Main {
 
         test1();
         testZero();
+        testZeropre();
+        testNEEE();
 
     }
     //notes about equations
@@ -49,6 +51,33 @@ public class Main {
                System.out.print( "[" + coeffs[i][j]+ " ]");
            }
            System.out.println(" = [" + and[i]+ "] \n");
+        }
+    }
+
+    public static void testZeropre(){
+        double[][] coeffs = {{3,1},{1,2}};
+        double[] and = {1,2};
+        zeroize(coeffs,and,1);
+        for(int i =0;i<coeffs.length;i++){
+            for(int j = 0; j<coeffs[0].length;j++){
+                System.out.print( "[" + coeffs[i][j]+ " ]");
+            }
+            System.out.println(" = [" + and[i]+ "] \n");
+        }
+    }
+    public static void testtriangle(){
+        double[][] coeffs = {{3,1,4},{1,2,2},{1,2,3}};
+        double[] and = {1,2};
+    }
+
+    public static void testNEEE(){
+        double[][] coeffs = {{12,6,6},{0,2,1},{6,3,4}};
+        double[] and = {41,20,30};
+        triangularize(coeffs,and);
+        double[] ee = backsub(coeffs,and);
+        System.out.println("testNee");
+        for(int j = 0; j<ee.length;j++){
+            System.out.print( "[" + ee[j]+ " ]");
         }
     }
 
@@ -127,8 +156,8 @@ public class Main {
     //TODO: make a triangularize method to make upper triangle
 
     public static void triangularize(double[][] equations, double solutions[]){
-        for(int i = equations.length-1; i>=0; i--){
-
+        for(int i = 0; i<equations.length-1; i++){
+            zeroize(equations,solutions,i+1);
         }
     }
 
@@ -149,9 +178,9 @@ public class Main {
 
 
     //return retcal so setval.A = scale row
-
     //return a an array that when multiplied by AR would make AR[row][i] * scale factor
     //retval should be diagonal
+
     public static double[][] scaleRow(double[][] AR, double S, int row){
         double[][] retval = new double[AR.length][AR[0].length];
 
